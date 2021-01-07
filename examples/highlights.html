@@ -74,6 +74,9 @@
       manager: "continuous"
     });
 
+    // rendition.annotations.add("highlight", "epubcfi(/6/14[xchapter_001]!/4/2/4,/6[c001s0003]/1:68,/8[c001s0004]/1:72)")
+    // rendition.annotations.add("highlight", "epubcfi(/6/18[xchapter_003]!/4/2/6,/1:519,/1:705)")
+    
     var displayed = rendition.display(6);
 
     // Navigation loaded
@@ -115,6 +118,7 @@
 
     // Apply a class to selected text
     rendition.on("selected", function(cfiRange, contents) {
+      console.log('hl')
       rendition.annotations.highlight(cfiRange, {}, (e) => {
         console.log("highlight clicked", e.target);
       });

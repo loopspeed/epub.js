@@ -1,6 +1,6 @@
 {
-  "name": "@loopspeed/epubjs",
-  "version": "0.3.88",
+  "name": "loopspeed-epubjs",
+  "version": "0.3.90",
   "description": "Parse and Render Epubs",
   "main": "lib/index.js",
   "module": "src/index.js",
