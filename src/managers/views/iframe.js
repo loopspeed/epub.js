@@ -3,7 +3,7 @@ import { extend, borders, uuid, isNumber, bounds, defer, createBlobUrl, revokeBl
 import EpubCFI from '../../epubcfi'
 import Contents from '../../contents'
 import { EVENTS } from '../../utils/constants'
-import { Pane, Highlight, Underline } from 'marks-pane'
+import { Pane, Highlight, Underline } from '@loopspeed/marks-pane'
 
 class IframeView {
   constructor(section, options) {
@@ -340,9 +340,11 @@ class IframeView {
       heightDelta: heightDelta,
     }
 
-    this.pane && this.pane.render()
-
     requestAnimationFrame(() => {
+      if (this.pane) {
+        this.pane.updateTarget(this.iframe)
+      }
+
       let mark
       for (let m in this.marks) {
         if (this.marks.hasOwnProperty(m)) {
@@ -584,11 +586,9 @@ class IframeView {
       this.emit(EVENTS.VIEWS.MARK_CLICKED, cfiRange, data)
     }
 
-    data['epubcfi'] = cfiRange
-
-    // if (!this.pane) {
-    this.pane = new Pane(this.iframe, this.element)
-    // }
+    if (!this.pane) {
+      this.pane = new Pane(this.iframe, this.element)
+    }
 
     let m = new Highlight(range, className, data, attributes)
     let h = this.pane.addMark(m)
